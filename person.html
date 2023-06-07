@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <title>Pb的个人中心</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+	<script defer src="style/fontawesome/js/all.min.js"></script>
+	<script src="node_modules/vue2/vue.js"></script>
+	<script src="node_modules/jquery/dist/jquery.js"></script>
+	<script src="node_modules/bootstrap-5.1.3-dist/js/bootstrap.js"></script>
+    <link id="theme-style" rel="stylesheet" href="style/css/pillar-1.css">
+
+	<style>
+		.webCards{
+			display:flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+		}
+
+		.hf{
+			display:flex;
+			justify-content: flex-end;
+		}
+
+		.img{
+			width: 286.4px;
+			height: 243px;
+		}
+
+		.inimg{
+			margin: 80px;
+		}
+
+		img{
+			width: 100%;
+			height: auto;
+		}
+
+		.card:hover{
+			box-shadow: 10px 10px rgba(76, 74, 74, 0.8);
+		}
+	</style>
+</head> 
+
+<body>
+	<div id="root">
+		<!-- 主体 -->
+		<article class="resume-wrapper text-center position-relative">
+			<div class="resume-wrapper-inner mx-auto text-start bg-white shadow-lg">
+				<header class="resume-header pt-4 pt-md-0">
+					<div class="row">
+						<div class="col-block col-md-auto resume-picture-holder text-center text-md-start">
+							<img class="picture" :src="user.userImg" alt="">
+						</div><!--//col-->
+						<div class="col">
+							<div class="row p-4 justify-content-center justify-content-md-between">
+								<div class="primary-info col-auto">
+									<h1 class="name mt-0 mb-1 text-white text-uppercase text-uppercase">{{user.userName}}</h1>
+									<div class="title mb-3">来自 {{user.address}}</div>
+									<ul class="list-unstyled">
+										<li><a class="text-link" href="#"><i class="fas fa-mobile-alt fa-fw me-2" data-fa-transform="grow-6"></i>{{user.phone}}</a></li>
+									</ul>
+								</div><!--//primary-info-->
+								<div class="secondary-info col-auto mt-2">
+									个性签名：{{user.content}}
+								</div><!--//secondary-info-->
+							</div><!--//row-->
+						</div><!--//col-->
+					</div><!--//row-->
+				</header>
+				<div class="resume-body p-5">
+					<section class="resume-section summary-section mb-5">
+						<h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">常用网站</h2>
+                        <!-- 网站卡片 -->
+                        <div class="webCards">
+                            <div class="card" style="width: 18rem;margin-bottom:10px;" v-for="c in webpages" key="c.id">
+								<div class="img">
+									<div class="inimg">
+                                		<img :src="c.img" class="card-img-top">
+									</div>
+								</div>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{c.title}}</h5>
+                                    <div class="card-end">
+                                        <div class="hf">
+                                            <a :href="c.personPage" class="btn btn-primary" style="margin-right:10px" target="_blank">个人中心</a>
+                                            <a :href="c.homePage" class="btn btn-primary" target="_blank">首页</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+					</section><!--//summary-section-->
+				</div>
+			</div>
+		</article> 
+	</div>
+
+    <script>
+		Vue.config.productionTip = false;
+										
+		const vm = new Vue({
+			el:'#root',
+			data:{
+				user: {
+					userId: '001',
+					userName: '庞博',
+					userImg:'img/person.jpg',
+					address:"四川 攀枝花",
+					phone:'15729857038',
+					content:"以清净心看世界，以欢喜心过生活，以平常心生情味，以柔软心除挂碍。",
+					
+            	},
+                webpages:[
+                    {id:'001',img:"img/CSDN.png",title:'CSDN论坛',personPage:"https://blog.csdn.net/qq_51732393?spm=1000.2115.3001.5343",homePage:"https://www.csdn.net/"},
+                    {id:'002',img:"img/bilibili.png",title:'Bilibili',personPage:"https://space.bilibili.com/1942128913?spm_id_from=333.1007.0.0",homePage:"https://www.bilibili.com/"},
+					{id:'021',img:"img/gitee.svg",title:'gitee',personPage:"#",homePage:"https://gitee.com/"},
+					{id:'007',img:"img/GIthub.webp.jpg",title:'GitHub',personPage:"https://github.com/javawebstu",homePage:"https://github.com/"},
+					{id:'018',img:"img/niukewang.png",title:'牛客网',personPage:"https://www.nowcoder.com/users/725312637",homePage:"https://www.nowcoder.com/"},
+					{id:'019',img:"img/yuque.svg",title:'语雀',homePage:"https://www.yuque.com/dashboard#edit",personPage:"https://www.yuque.com/u33311317"},
+					{id:'020',img:"img/uniapp.png",title:'Uniapp',personPage:"#",homePage:"https://uniapp.dcloud.net.cn/"},
+                    {id:'022',img:"img/express.png",title:'Express中文网',personPage:"#",homePage:"https://www.expressjs.com.cn/"},
+					{id:'003',img:"img/MDN.png",title:'MDN中文网',personPage:"#",homePage:"https://developer.mozilla.org/zh-CN/"},
+                    {id:'004',img:"img/MDN.png",title:'MDN英文网',personPage:"",homePage:"https://developer.mozilla.org/en-US/"},
+					{id:'005',img:"img/Vue.svg",title:'Vue2',personPage:"#",homePage:"https://v2.cn.vuejs.org/v2/guide/"},
+                    {id:'006',img:"img/Vue.svg",title:'Vue3',personPage:"#",homePage:"https://cn.vuejs.org/"},
+                    {id:'008',img:"img/leecode.webp.jpg",title:'LeeCode中文网',personPage:"https://leetcode.cn/u/qi-yue-svz/",homePage:"https://leetcode.cn/?utm_source=LCUS&utm_medium=ip_redirect&utm_campaign=transfer2china"},
+                    {id:'009',img:"img/Bootstrap.png",title:'Bootstrap5中文文档',personPage:"#",homePage:"https://v5.bootcss.com/docs/getting-started/introduction/"},
+					{id:'010',img:"img/W3school.png",title:'W3school',personPage:"#",homePage:"https://www.w3school.com.cn/index.html"},
+                    {id:'011',img:"img/W3Cschool.png",title:'W3Cschool',personPage:"https://www.w3cschool.cn/my",homePage:"https://www.w3cschool.cn/"},
+                    {id:'012',img:"img/cainiao.png",title:'菜鸟教程',personPage:"#",homePage:"https://www.runoob.com/"},
+                    {id:'013',img:"img/staticfile.png",title:'Staticfile在线引入',personPage:"#",homePage:"https://www.staticfile.org/"},
+                    {id:'014',img:"img/ruanyifeng.png",title:'阮一峰的网络日志',personPage:"#",homePage:"https://www.ruanyifeng.com/blog/"},
+                    {id:'015',img:"img/iconfont.png",title:'阿里iconfont',personPage:"https://www.iconfont.cn/user/detail?spm=a313x.7781069.1998910419.40&uid=10898351&nid=kqlmdKLM2tUN",homePage:"https://www.iconfont.cn/"},
+					{id:'016',img:"img/jiaozhichu.png",title:'教之初在线考试系统',personPage:"#",homePage:"http://csexam.suse.edu.cn/ksxt/ksonline/index.jsp"},
+                    {id:'017',img:"img/xuexitong.webp.jpg",title:'学习通',personPage:"http://i.chaoxing.com/base?t=1632216184973",homePage:"http://i.chaoxing.com/base?t=1632216184973"},
+                    // {id:'',img:"img/",title:'',personPage:"",homePage:""},
+					// 22
+                ]
+			},
+		})
+	</script>
+</body>
+</html>
